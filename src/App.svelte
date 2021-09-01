@@ -1,18 +1,52 @@
 <main>
-	<h1>Cloudflare Home Assistant Middleware</h1>
-	<p>This is the Cloudflare Pages page for the HomeAssistant middleware.</p>
-	<p>
-		Hopefully this will describe how the middleware works at some point in the future. Right now it's just a demo so I can figure out how/why I'd want to use the Svelte framework on Pages.
-	</p>
-	<h3>Home Assistant Configuration</h3>
-	<p>
-		Configure a rest sensor set to hit your cloudflare address as often as you'd like. I'd probably do every minute, but if you're trying to limit requests and traffic then you can make this longer.
-	</p>
-	<div style="padding: 3rem;">
+	<div class="container">
+		<h1>Cloudflare Home Assistant Middleware</h1>
+		<p>This is the Cloudflare Pages page for the HomeAssistant middleware.</p>
 		<p>
-			Blerg
+			Hopefully this will describe how the middleware works at some point in the future. Right now it's just a demo so I can figure out how/why I'd want to use the Svelte framework on Pages.
 		</p>
+		<div class="section">
+			<h3>Home Assistant Configuration</h3>
+			<p>
+				Configure a rest sensor. This will just hit the Cloudflare page and pass along a client token.
+			</p>
+			<p>
+				Configure an automation on a schedule of whenever you'd like the IP address to change. This will also affect API requests time-in-queue when your IP address changes.
+			</p>			
+			<pre style="margin-left: 2rem; padding: 10px; background-color: lightgray;">
+alias: 'Schedule: Clear Logs Each Hour'
+description: ''
+trigger:
+- platform: time_pattern 
+	minutes: '1'
+condition: []
+action:
+- service: shell_command.shell_rotate_log
+	data: &lbrace &rbrace
+mode: single
+			</pre>
+
+			<p>
+				\\ TODO: Insert like an accordion or something here so there can be screenshots of this config process
+			</p>
+		</div>
+		<div class="section">
+			<h3>Cloudflare Configuration</h3>
+			<p>
+				Clone the workers folder from this repo to your own private repo or download the release zip <a href="#">here</a>. You can use wrangler to get everything into the cloud, or you can copy->paste the contents of the main file into the worker file.
+			</p>
+			<p>
+				You need to set a <strong>IPUPDATETOKEN</strong> environmental variable that Home Assistant will send alongside it's requests to confirm its identity before resetting the IP address.
+			</p>
+			<p>
+			You'll also need to set the <strong>CLIENTTOKEN</strong> env variable, which will allow you to authenticate against the cloudflare API.
+			</p>
+			<p>
+				\\ TODO: Insert like an accordion or something here so there can be screenshots of this config process
+			</p>
+		</div>
 	</div>
+
 </main>
 
 <style>
@@ -21,6 +55,17 @@
 		padding: 1em;
 		max-width: 240px;
 		margin: 0 auto;
+	}
+
+	.container {
+		padding: 0vw 10vw;
+	}
+
+	.section {
+		text-align: left;
+		margin-top: 3rem;;
+		border: 1 px solid gray;
+		border-radius: 30px;
 	}
 
 	h1 {
