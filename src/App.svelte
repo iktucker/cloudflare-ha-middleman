@@ -13,9 +13,9 @@
 			<p>
 				Configure an automation on a schedule of whenever you'd like the IP address to change. This will also affect API requests time-in-queue when your IP address changes.
 			</p>			
-			<pre style="margin-left: 2rem; padding: 10px; background-color: lightgray;">
-alias: 'Schedule: Clear Logs Each Hour'
-description: ''
+			<pre style="margin: 0rem 2rem; padding: 10px; background-color: lightgray; width: 70vw; overflow: scroll;">
+alias: 'Schedule: Update IP Address Once Per Minute'
+description: 'Sends an API request every hour to Cloudflare'
 trigger:
 - platform: time_pattern 
 	minutes: '1'
@@ -48,17 +48,17 @@ mode: single
 	</div>
 
 </main>
+<footer>
+	<br><br>
+</footer>
 
 <style>
 	main {
 		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
 	}
 
 	.container {
-		padding: 0vw 10vw;
+		padding: 0vw 5vw;
 	}
 
 	.section {
@@ -71,7 +71,7 @@ mode: single
 	h1 {
 		color: #ff3e00;
 		text-transform: uppercase;
-		font-size: 4em;
+		font-size: 3em;
 		font-weight: 100;
 	}
 
