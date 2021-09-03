@@ -33,7 +33,7 @@ mode: single
 		<div class="section">
 			<h3>Cloudflare Configuration</h3>
 			<p>
-				Clone the workers folder from this repo to your own private repo or download the release zip <a href="#">here</a>. You can use wrangler to get everything into the cloud, or you can copy->paste the contents of the main file into the worker file.
+				Clone the workers folder from this repo to your own private repo or download the release zip <a href="#blank">here</a>. You can use wrangler to get everything into the cloud, or you can copy->paste the contents of the main file into the worker file.
 			</p>
 			<p>
 				You need to set a <strong>IPUPDATETOKEN</strong> environmental variable that Home Assistant will send alongside it's requests to confirm its identity before resetting the IP address.
