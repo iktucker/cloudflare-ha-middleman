@@ -34,7 +34,16 @@ return "a file";
 async function handleRequest(request) {
   console.log(new Map(request.headers));
   let body = await readRequestBody(request);
+  let requestURL = request.url;
   let myip = '';
+
+  if (requestURL.includes('workers.dev')) {
+    return await new Response(fetch(`http://${HA.get('current_ip')}:8123`, {
+      headers: request.headers,
+      body: body,
+      method: request.method
+    }));
+  }
 
   if (typeof(body.myip) == 'string') {
       myip = body.myip;
@@ -43,7 +52,7 @@ async function handleRequest(request) {
 
   await HA.put('last_request', JSON.stringify(body));
 
-  return new Response('Hello worker @ ' + await HA.get('current_ip') , {
+  return new Response('Hello worker @ ' + await HA.get('current_ip') + requestURL, {
       headers: { 'content-type': 'text/plain' },
   })
 }
